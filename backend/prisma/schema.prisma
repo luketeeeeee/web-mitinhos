@@ -15,7 +15,7 @@ model User {
   username       String  @unique
   bio            String?
   password       String
-  profilePicture String
+  profilePicture String?
 }
 
 model Item {
