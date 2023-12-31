@@ -1,10 +1,10 @@
-// import { findAll } from './find-all';
+import { findAll } from './find-all';
 // import { findByName } from './find-by-name';
 import { create } from './create';
 // import { update } from './update';
 
 export const UserController = {
-  // findAll,
+  findAll,
   // findByName,
   create,
   // update,
