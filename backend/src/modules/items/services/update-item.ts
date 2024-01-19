@@ -1,0 +1,6 @@
+import { Prisma } from '@prisma/client';
+import prisma from '../../prisma';
+
+export const updateItem = (itemId: string, newItemData: Prisma.ItemUpdateInput) => {
+  return prisma.item.update({ where: { id: itemId }, data: newItemData });
+};
