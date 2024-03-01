@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
 import { findItemById, updateItem } from '../services';
+import { Prisma } from '@prisma/client';
 
 export const update = async (req: Request, res: Response) => {
   try {
     const { itemId } = req.params;
-    const body = req.body;
+    const { checked, concludedAt, description, title }: Prisma.ItemUpdateInput = req.body;
 
     const item = findItemById(itemId);
 
@@ -14,7 +15,12 @@ export const update = async (req: Request, res: Response) => {
       });
     }
 
-    const updatedItem = await updateItem(itemId, body);
+    const updatedItem = await updateItem(itemId, {
+      checked,
+      concludedAt,
+      description,
+      title,
+    });
 
     return res.status(200).json({
       message: 'item successfully updated',
