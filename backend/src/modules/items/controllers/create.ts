@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
 import { createItem } from '../services';
-import { Prisma } from '@prisma/client';
 
 export const create = async (req: Request, res: Response) => {
   try {
-    const { description, title }: Prisma.ItemCreateInput = req.body;
+    const { description, title } = req.body;
 
     const newItem = await createItem({
       checked: false,

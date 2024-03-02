@@ -14,7 +14,7 @@ cloudinary.config({
 
 export const create = async (req: Request, res: Response) => {
   try {
-    const body = req.body;
+    const { bio, password, username, ...body } = req.body;
 
     if (body.profilePicture) {
       body.profilePicture = await cloudinary.uploader.upload(body.profilePicture);
@@ -30,8 +30,10 @@ export const create = async (req: Request, res: Response) => {
     const hashPass = await argon2.hash(body.password);
 
     const newUser = await createUser({
-      ...body,
+      bio,
       password: hashPass,
+      username,
+      profilePicture: body.profilePicture,
     });
 
     return res.status(201).json({
@@ -39,8 +41,6 @@ export const create = async (req: Request, res: Response) => {
       data: newUser,
     });
   } catch (error) {
-    console.log(error);
-
     return res.status(500).json({
       message: 'internal server error',
     });

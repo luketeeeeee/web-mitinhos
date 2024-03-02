@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "engines": {
-    "node": "18"
+    "node": "20"
   },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
@@ -27,7 +27,7 @@
   "dependencies": {
     "@prisma/client": "^5.7.1",
     "argon2": "^0.31.2",
-    "cloudinary": "^1.41.2",
+    "cloudinary": "^1.41.3",
     "cors": "^2.8.5",
     "dayjs": "^1.11.10",
     "dotenv": "^16.3.1",

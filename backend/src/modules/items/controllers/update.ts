@@ -1,11 +1,10 @@
 import { Request, Response } from 'express';
 import { findItemById, updateItem } from '../services';
-import { Prisma } from '@prisma/client';
 
 export const update = async (req: Request, res: Response) => {
   try {
     const { itemId } = req.params;
-    const { checked, concludedAt, description, title }: Prisma.ItemUpdateInput = req.body;
+    const { checked, concludedAt, description, title } = req.body;
 
     const item = findItemById(itemId);
 
