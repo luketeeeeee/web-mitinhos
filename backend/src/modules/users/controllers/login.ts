@@ -12,7 +12,7 @@ export const login = async (req: Request, res: Response) => {
   const existingUser = await findByUsername(username);
 
   if (!existingUser) {
-    return res.status(401).json({
+    return res.status(404).json({
       message: 'invalid login credentials',
     });
   }
@@ -20,7 +20,7 @@ export const login = async (req: Request, res: Response) => {
   const validPassword = await argon2.verify(existingUser.password, password);
 
   if (!validPassword) {
-    return res.status(401).json({
+    return res.status(404).json({
       message: 'invalid login credentials',
     });
   }
@@ -28,22 +28,23 @@ export const login = async (req: Request, res: Response) => {
   try {
     const jwtSecret = await process.env.JWT_SECRET;
 
-    const token = jwt.sign(
-      {
-        id: existingUser.id,
-        username: existingUser.username,
-      },
-      //@ts-ignore
-      jwtSecret,
-      {
-        expiresIn: '365d',
-      }
-    );
+    if (jwtSecret) {
+      const token = jwt.sign(
+        {
+          id: existingUser.id,
+          username: existingUser.username,
+        },
+        jwtSecret,
+        {
+          expiresIn: '365d',
+        }
+      );
 
-    return res.status(200).json({
-      token,
-      message: 'authentication completed successfully',
-    });
+      return res.status(200).json({
+        token,
+        message: 'authentication completed successfully',
+      });
+    }
   } catch (error) {
     return res.status(500).json({
       message: 'internal server error',
