@@ -16,6 +16,8 @@ model User {
   bio            String?
   password       String
   profilePicture String?
+
+  @@map("users")
 }
 
 model Item {
@@ -25,6 +27,8 @@ model Item {
   description String
   photos      Photo[]
   concludedAt DateTime?
+
+  @@map("items")
 }
 
 model Photo {
@@ -33,4 +37,6 @@ model Photo {
   subtitle String?
   Item     Item?   @relation(fields: [itemId], references: [id], onDelete: Cascade)
   itemId   String?
+
+  @@map("photos")
 }
