@@ -15,19 +15,20 @@ cloudinary.config({
 export const create = async (req: Request, res: Response) => {
   try {
     const { bio, password, username, ...body } = req.body;
+    console.log(username);
 
     if (body.profilePicture) {
       body.profilePicture = await cloudinary.uploader.upload(body.profilePicture);
     }
 
-    const existingUser = await findByUsername(body.username);
+    const existingUser = await findByUsername(username);
     if (existingUser) {
       return res.status(409).json({
         message: 'username already exists',
       });
     }
 
-    const hashPass = await argon2.hash(body.password);
+    const hashPass = await argon2.hash(password);
 
     const newUser = await createUser({
       bio,
@@ -41,6 +42,7 @@ export const create = async (req: Request, res: Response) => {
       data: newUser,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       message: 'internal server error',
     });
