@@ -1,10 +1,12 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 
-import { Home } from './pages/Home';
 import { Month3Letter } from './pages/Month3Letter';
+import { Login } from './pages/Login';
+import { Home } from './pages/Home';
+
 import { useUsers } from './hooks/users.hook';
-import { useEffect } from 'react';
 
 function App() {
 	const authToken = Cookies.get('token');
@@ -28,12 +30,12 @@ function App() {
 		},
 	]);
 
-	// const noAuthUserRoutes = createBrowserRouter([
-	//   {
-	//     path: '/*',
-	//     element: <Login />
-	//   },
-	// ])
+	const noAuthUserRoutes = createBrowserRouter([
+		{
+			path: '/',
+			element: <Login />,
+		},
+	]);
 
 	// const routes = createBrowserRouter([
 	// 	{
@@ -51,8 +53,7 @@ function App() {
 			{loggedUser.token ? (
 				<RouterProvider router={authenticatedUserRoutes} />
 			) : (
-				// <RouterProvider router={} />
-				<></>
+				<RouterProvider router={noAuthUserRoutes} />
 			)}
 		</>
 	);

@@ -9,7 +9,7 @@ export const validateJWT = async (req: Request, res: Response) => {
 
   if (!token) {
     return res.status(401).json({
-      message: 'error: no token',
+      message: 'failed auth: no token',
     });
   }
 
@@ -21,7 +21,7 @@ export const validateJWT = async (req: Request, res: Response) => {
         if (error) {
           return res.status(401).json({
             isTokenValid: false,
-            message: 'error: invalid token',
+            message: 'failed auth: invalid token',
           });
         }
 
