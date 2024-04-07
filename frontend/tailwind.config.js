@@ -34,6 +34,10 @@ module.exports = {
 			colors: {
 				mainBg: '#CACACA',
 				mainFont: '#232729',
+				mainForm: '#D0C3DE',
+				purpleMillena: '#6939EB',
+				blueLucas: '#1F25D7',
+				millenaToLucas: '#4E32E4',
 			},
 			fontFamily: {
 				poppins: ['Poppins', 'sans-serif'],
