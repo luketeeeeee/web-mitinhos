@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-// import Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 import { UserType } from '../types';
 
 type useUsersProps = {
@@ -48,6 +48,8 @@ export const useUsers = create<useUsersProps>((set) => ({
 			}
 
 			return response.json().then((res) => {
+				set({ loggedUser: { username: res.username, token: res.token } });
+				Cookies.set('token', res.token);
 				console.log(res);
 			});
 		});

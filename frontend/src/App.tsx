@@ -1,5 +1,4 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 
 import { Month3Letter } from './pages/Month3Letter';
@@ -13,11 +12,11 @@ function App() {
 
 	const { loggedUser, validateAuthToken } = useUsers();
 
-	useEffect(() => {
+	if (authToken) {
 		validateAuthToken({
 			token: authToken,
 		});
-	}, []);
+	}
 
 	const authenticatedUserRoutes = createBrowserRouter([
 		{
@@ -37,20 +36,9 @@ function App() {
 		},
 	]);
 
-	// const routes = createBrowserRouter([
-	// 	{
-	// 		path: '/',
-	// 		element: <Home />,
-	// 	},
-	// 	{
-	// 		path: '/feliz-90-dias',
-	// 		element: <Month3Letter />,
-	// 	},
-	// ]);
-
 	return (
 		<>
-			{loggedUser.token ? (
+			{loggedUser && authToken ? (
 				<RouterProvider router={authenticatedUserRoutes} />
 			) : (
 				<RouterProvider router={noAuthUserRoutes} />

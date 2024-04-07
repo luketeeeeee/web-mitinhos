@@ -15,8 +15,11 @@ import { Button } from '@/components/ui/button';
 
 import ricosLogin from '../../assets/ricos-login.png';
 import tontonLogin from '../../assets/tonton-login.png';
+import { useUsers } from '@/hooks/users.hook';
 
 export const Login = () => {
+	const { login } = useUsers();
+
 	const loginForm = useForm<LoginUserSchemaType>({
 		resolver: zodResolver(loginUserSchema),
 		defaultValues: {
@@ -26,7 +29,7 @@ export const Login = () => {
 	});
 
 	const onSubmit: SubmitHandler<LoginUserSchemaType> = async (data) => {
-		console.log(data);
+		await login(data);
 	};
 
 	return (
@@ -94,13 +97,13 @@ export const Login = () => {
 				</Form>
 			</main>
 
-			<footer className="flex flex-col items-center">
+			<footer className="flex flex-col items-center font-medium">
 				<p>te amo millena</p>
-				<div className="flex gap-1 font-medium">
-					<p className="text-purpleMillena">#amor</p>
-					<p className="text-blueLucas">#linda</p>
-					<p className="text-purpleMillena">#perfeita</p>
-					<p className="text-blueLucas">#teamo</p>
+				<div className="flex gap-1 [&>*:nth-child(even)]:text-blueLucas [&>*:nth-child(odd)]:text-purpleMillena">
+					<p>#amor</p>
+					<p>#linda</p>
+					<p>#perfeita</p>
+					<p>#teamo</p>
 				</div>
 			</footer>
 		</div>
