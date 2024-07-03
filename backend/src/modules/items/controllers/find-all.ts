@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { findAllItems } from '../services';
+import { findAllItems } from '../items.services';
 
 export const findAll = async (req: Request, res: Response) => {
   try {

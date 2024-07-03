@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { findItemById, deleteItem } from '../services';
+import { findItemById, deleteItem } from '../items.services';
 
 export const remove = async (req: Request, res: Response) => {
   try {

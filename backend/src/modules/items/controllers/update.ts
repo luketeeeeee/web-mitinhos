@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { findItemById, updateItem } from '../services';
+import { findItemById, updateItem } from '../items.services';
 
 export const update = async (req: Request, res: Response) => {
   try {
