@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { findItemById } from '../items.services';
+import { findItemById } from '../services';
 
 export const findById = async (req: Request, res: Response) => {
   try {
