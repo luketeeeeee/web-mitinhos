@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { Home } from './pages/Home';
 import { Month3Letter } from './pages/Month3Letter';
+import { Month21Letter } from './pages/Month21Letter';
 
 function App() {
 	const routes = createBrowserRouter([
@@ -13,6 +14,10 @@ function App() {
 			path: '/feliz-90-dias',
 			element: <Month3Letter />,
 		},
+        {
+            path: '/feliz-638-dias',
+            element: <Month21Letter />
+        }
 	]);
 
 	return (
